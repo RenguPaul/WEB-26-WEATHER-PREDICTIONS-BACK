@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Плитка — Climate Forecast</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/static.css"
+    >
+</head>
+
+<body class="app-page tile-page">
+
+    <main class="phone-screen light-screen">
+
+        <header class="page-header tile-header">
+
+            <div>
+
+                <span class="eyebrow blue-eyebrow">
+                    CLIMATE FORECAST
+                </span>
+
+                <h1>
+                    Плитка
+                </h1>
+
+                <p>
+                    Климатические расчёты
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <section class="filter-section">
+
+            <span class="filter-label">
+                ФИЛЬТР ПО CO₂
+            </span>
+
+
+            <form
+                method="get"
+                action="/forecast/tile"
+                class="filter-form"
+            >
+
+                <input
+                    class="filter-input"
+                    type="number"
+                    name="co2"
+                    min="0"
+                    step="1"
+                    placeholder="Введите CO₂"
+                    value="{{ co2_filter }}"
+                    aria-label="Концентрация CO₂ в ppm"
+                >
+
+                <span class="filter-unit">
+                    ppm
+                </span>
+
+                <button
+                    class="filter-button"
+                    type="submit"
+                >
+                    Показать
+                </button>
+
+            </form>
+
+
+            {% if co2_filter != '' %}
+
+                <p class="filter-state">
+                    Фильтр: CO₂ = {{ co2_filter|int }} ppm
+                </p>
+
+            {% else %}
+
+                <p class="filter-state">
+                    Показаны все опубликованные прогнозы
+                </p>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="tile-grid">
+
+            {% for prediction in predictions %}
+
+                <a
+                    class="prediction-card"
+                    href="/forecast/{{ prediction.id }}"
+                >
+
+                    <img
+                        src="http://localhost:9000/climate-media/{{ prediction.image_key }}"
+                        alt="{{ prediction.title }}"
+                    >
+
+
+                    <div class="prediction-card-body">
+
+                        <strong class="card-temperature">
+                            +{{ '%.1f'|format(prediction.temperature_change_c) }} °C
+                        </strong>
+
+
+                        <h2>
+                            {{ prediction.title }}
+                        </h2>
+
+
+                        <span class="card-likes">
+                            ♡ {{ prediction.likes_count }}
+                        </span>
+
+                    </div>
+
+                </a>
+
+            {% else %}
+
+                <p class="empty-state">
+                    Опубликованных прогнозов
+                    с таким значением CO₂ не найдено.
+                </p>
+
+            {% endfor %}
+
+        </section>
+
+
+        <nav
+            class="bottom-nav"
+            aria-label="Основная навигация"
+        >
+
+            <a
+                class="nav-item"
+                href="/forecast/1"
+            >
+                <span class="nav-icon">
+                    ◉
+                </span>
+
+                <span>
+                    Лента
+                </span>
+            </a>
+
+
+            <a
+                class="nav-item"
+                href="/forecast/draft"
+            >
+                <span class="nav-icon">
+                    ＋
+                </span>
+
+                <span>
+                    Добавить
+                </span>
+            </a>
+
+
+            <a
+                class="nav-item active"
+                href="/forecast/tile"
+            >
+                <span class="nav-icon">
+                    ▦
+                </span>
+
+                <span>
+                    Плитка
+                </span>
+            </a>
+
+        </nav>
+
+    </main>
+
+</body>
+</html>

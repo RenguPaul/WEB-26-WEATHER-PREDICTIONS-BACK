@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>{{ prediction.title }} — Climate Forecast</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/static.css"
+    >
+</head>
+
+<body class="app-page feed-page">
+
+    <main class="phone-screen feed-screen">
+
+        <section class="feed-media">
+
+            <video
+                class="feed-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="http://localhost:9000/climate-media/{{ prediction.image_key }}"
+            >
+                <source
+                    src="http://localhost:9000/climate-media/{{ prediction.video_key }}"
+                    type="video/mp4"
+                >
+            </video>
+
+            <div class="feed-overlay">
+
+                <div class="feed-topline">
+
+                    <span class="eyebrow">
+                        CLIMATE FORECAST
+                    </span>
+
+                    <span class="temperature">
+                        +{{ '%.1f'|format(prediction.temperature_change_c) }} °C
+                    </span>
+
+                </div>
+
+
+                <div class="feed-content">
+
+                    <div class="like-count">
+                        ♡ {{ prediction.likes_count }}
+                    </div>
+
+                    <span class="eyebrow">
+                        CLIMATE FORECAST
+                    </span>
+
+                    <h1>
+                        {{ prediction.title }}
+                    </h1>
+
+
+                    <div class="topic-row">
+
+                        <span class="topic-chip">
+                            CO₂ {{ prediction.co2_ppm|int }} ppm
+                        </span>
+
+                        <span class="topic-chip">
+                            CH₄ {{ prediction.ch4_ppb|int }} ppb
+                        </span>
+
+                        <span class="topic-chip">
+                            N₂O {{ prediction.n2o_ppb|int }} ppb
+                        </span>
+
+                    </div>
+
+
+                    <details class="description-details">
+
+                        <summary>
+                            {{ prediction.description }}
+                            <span>Подробнее →</span>
+                        </summary>
+
+                        <p>
+                            Значения концентраций используются
+                            как параметры климатического сценария.
+                            Следующий опубликованный сценарий
+                            открывается через кнопку ниже.
+                        </p>
+
+                    </details>
+
+
+                    <a
+                        class="primary-button"
+                        href="/forecast/{{ prediction.id }}?next=true"
+                    >
+                        Следующий
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <nav
+            class="bottom-nav"
+            aria-label="Основная навигация"
+        >
+
+            <a
+                class="nav-item active"
+                href="/forecast/{{ prediction.id }}"
+            >
+                <span class="nav-icon">◉</span>
+                <span>Лента</span>
+            </a>
+
+
+            <a
+                class="nav-item"
+                href="/forecast/draft"
+            >
+                <span class="nav-icon">＋</span>
+                <span>Добавить</span>
+            </a>
+
+
+            <a
+                class="nav-item"
+                href="/forecast/tile"
+            >
+                <span class="nav-icon">▦</span>
+                <span>Плитка</span>
+            </a>
+
+        </nav>
+
+    </main>
+
+</body>
+</html>
