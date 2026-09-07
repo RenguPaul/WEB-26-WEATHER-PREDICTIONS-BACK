@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from fastapi import Request
 
 from data.collections import climate_predictions
 
@@ -84,7 +83,7 @@ async def get_tile(
 async def get_forecast(
     request: Request,
     prediction_id: int,
-    next: bool = Query(default=False),
+    go_next: bool = Query(default=False, alias="next"),
 ):
     published = get_published_predictions()
 
@@ -103,7 +102,7 @@ async def get_forecast(
             detail="Прогноз не найден",
         )
 
-    if next:
+    if go_next:
         next_index = current_index + 1
 
         if next_index >= len(published):
