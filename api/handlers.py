@@ -24,7 +24,7 @@ def prepare_prediction(prediction):
 
 
 @router.get("/forecast/draft", response_class=HTMLResponse)
-async def get_draft(request: Request):
+def get_draft(request: Request):
     draft = next(
         (
             prediction
@@ -50,7 +50,7 @@ async def get_draft(request: Request):
 
 
 @router.get("/forecast/tile", response_class=HTMLResponse)
-async def get_tile(
+def get_tile(
     request: Request,
     co2: int | None = Query(default=None),
 ):
@@ -80,7 +80,7 @@ async def get_tile(
 
 
 @router.get("/forecast/{prediction_id}", response_class=HTMLResponse)
-async def get_forecast(
+def get_forecast(
     request: Request,
     prediction_id: int,
     go_next: bool = Query(default=False, alias="next"),
