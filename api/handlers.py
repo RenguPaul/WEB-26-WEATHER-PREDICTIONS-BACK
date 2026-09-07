@@ -1,17 +1,16 @@
-import builtins
-
-from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi import Request
 
-from data.collections import climate_predictions, climate_likes
+from data.collections import climate_predictions
 
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 
-def published_predictions():
-    """Возвращает только опубликованные прогнозы."""
+def get_published_predictions():
     return [
         prediction
         for prediction in climate_predictions
@@ -19,99 +18,14 @@ def published_predictions():
     ]
 
 
-def likes_count(prediction_id: int) -> int:
-    """Рассчитывает количество лайков из отдельной коллекции."""
-    return sum(
-        1
-        for like in climate_likes
-        if like["prediction_id"] == prediction_id
-    )
+def prepare_prediction(prediction):
+    prepared_prediction = prediction.copy()
+    prepared_prediction["likes_count"] = len(prediction["likes"])
+    return prepared_prediction
 
 
-def add_like_counts(predictions):
-    """Добавляет количество лайков к данным для шаблона."""
-    result = []
-
-    for prediction in predictions:
-        item = dict(prediction)
-        item["likes_count"] = likes_count(
-            prediction["id"]
-        )
-        result.append(item)
-
-    return result
-
-
-@router.get("/forecast/{prediction_id}")
-def get_prediction_feed(
-    request: Request,
-    prediction_id: int,
-    next_page: bool = Query(
-        default=False,
-        alias="next",
-    ),
-):
-    """
-    Лента.
-
-    GET по ID прогноза.
-    Параметр ?next=true открывает следующий
-    опубликованный прогноз.
-    """
-
-    predictions = published_predictions()
-
-    current_index = builtins.next(
-        (
-            index
-            for index, prediction in enumerate(predictions)
-            if prediction["id"] == prediction_id
-        ),
-        None,
-    )
-
-    if current_index is None:
-        raise HTTPException(
-            status_code=404,
-            detail="Прогноз не найден",
-        )
-
-    if next_page:
-        next_index = current_index + 1
-
-        if next_index >= len(predictions):
-            next_index = 0
-
-        prediction = predictions[next_index]
-
-    else:
-        prediction = predictions[current_index]
-
-    context_prediction = dict(prediction)
-
-    context_prediction["likes_count"] = likes_count(
-        prediction["id"]
-    )
-
-    return templates.TemplateResponse(
-        request=request,
-        name="feed.html",
-        context={
-            "prediction": context_prediction,
-        },
-    )
-
-
-@router.get("/forecast/draft")
-def get_draft_prediction(
-    request: Request,
-):
-    """
-    Страница добавления.
-
-    Получает единственный черновой прогноз.
-    """
-
+@router.get("/forecast/draft", response_class=HTMLResponse)
+async def get_draft(request: Request):
     draft = next(
         (
             prediction
@@ -127,37 +41,21 @@ def get_draft_prediction(
             detail="Черновик не найден",
         )
 
-    context_prediction = dict(draft)
-
-    context_prediction["likes_count"] = likes_count(
-        draft["id"]
-    )
-
     return templates.TemplateResponse(
         request=request,
         name="add.html",
         context={
-            "prediction": context_prediction,
+            "prediction": prepare_prediction(draft),
         },
     )
 
 
-@router.get("/forecast/tile")
-def get_prediction_tiles(
+@router.get("/forecast/tile", response_class=HTMLResponse)
+async def get_tile(
     request: Request,
-    co2: float | None = Query(
-        default=None,
-        ge=0,
-    ),
+    co2: int | None = Query(default=None),
 ):
-    """
-    Плитка.
-
-    Серверная фильтрация опубликованных прогнозов
-    по числовому значению CO₂.
-    """
-
-    predictions = published_predictions()
+    predictions = get_published_predictions()
 
     if co2 is not None:
         predictions = [
@@ -166,19 +64,60 @@ def get_prediction_tiles(
             if prediction["co2_ppm"] == co2
         ]
 
-    predictions = add_like_counts(
-        predictions
-    )
+    predictions = [
+        prepare_prediction(prediction)
+        for prediction in predictions
+    ]
 
     return templates.TemplateResponse(
         request=request,
         name="tile.html",
         context={
+            "request": request,
             "predictions": predictions,
-            "co2_filter": (
-                ""
-                if co2 is None
-                else co2
-            ),
+            "co2_filter": co2 if co2 is not None else "",
+        },
+    )
+
+
+@router.get("/forecast/{prediction_id}", response_class=HTMLResponse)
+async def get_forecast(
+    request: Request,
+    prediction_id: int,
+    next: bool = Query(default=False),
+):
+    published = get_published_predictions()
+
+    current_index = next(
+        (
+            index
+            for index, prediction in enumerate(published)
+            if prediction["id"] == prediction_id
+        ),
+        None,
+    )
+
+    if current_index is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Прогноз не найден",
+        )
+
+    if next:
+        next_index = current_index + 1
+
+        if next_index >= len(published):
+            next_index = 0
+
+        prediction = published[next_index]
+    else:
+        prediction = published[current_index]
+
+    return templates.TemplateResponse(
+        request=request,
+        name="feed.html",
+        context={
+            "request": request,
+            "prediction": prepare_prediction(prediction),
         },
     )

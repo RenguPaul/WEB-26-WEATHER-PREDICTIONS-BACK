@@ -8,20 +8,17 @@ from api.handlers import router
 app = FastAPI(
     title="Climate Temperature Forecast",
     description=(
-        "Учебное приложение для прогнозирования изменения "
-        "глобальной средней температуры Земли "
-        "в зависимости от концентрации парниковых газов."
+        "Прогноз температуры на Земле "
+        "в зависимости от содержания парниковых газов в атмосфере."
     ),
 )
 
-# Подключаем папку со стилями.
 app.mount(
     "/static",
     StaticFiles(directory="static"),
     name="static",
 )
 
-# Подключаем маршруты приложения.
 app.include_router(router)
 
 
