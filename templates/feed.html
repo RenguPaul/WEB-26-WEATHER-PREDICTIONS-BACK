@@ -1,10 +1,14 @@
-`
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Climate Forecast — Лента</title>
 
@@ -12,6 +16,7 @@
         rel="stylesheet"
         href="/static/css/static.css"
     >
+
 </head>
 
 <body>
@@ -28,19 +33,25 @@
             playsinline
             poster="{{ prediction.image_url }}"
         >
+
             <source
                 src="{{ prediction.video_url }}"
                 type="video/mp4"
             >
+
         </video>
+
 
         <div class="feed-overlay">
 
             <div class="feed-top">
+
                 <span class="brand-name">
                     CLIMATE FORECAST
                 </span>
+
             </div>
+
 
             <div class="feed-content">
 
@@ -48,22 +59,27 @@
                     +{{ "%.1f"|format(prediction.temperature_change_c) }} °C
                 </div>
 
+
                 <button
                     type="button"
                     class="like-row"
                     onclick="toggleLike(this)"
-                    aria-label="Лайк"
+                    aria-label="Поставить лайк"
                 >
+
                     <span class="heart">♥</span>
 
                     <span class="like-count">
                         {{ prediction.likes_count }}
                     </span>
+
                 </button>
+
 
                 <h1>
                     {{ prediction.title }}
                 </h1>
+
 
                 <div class="gas-chips">
 
@@ -81,13 +97,17 @@
 
                 </div>
 
+
                 <p class="feed-description">
+
                     {{ prediction.description }}
 
                     <span class="more-link">
                         Подробнее →
                     </span>
+
                 </p>
+
 
                 <a
                     class="primary-button"
@@ -113,6 +133,7 @@
             <span>Лента</span>
         </a>
 
+
         <a
             class="nav-item"
             href="/forecast/draft"
@@ -121,12 +142,13 @@
             <span>Добавить</span>
         </a>
 
+
         <a
             class="nav-item"
             href="/forecast/tile"
         >
             <span>▦</span>
-            <span>Плитка</span>
+            <span>Каталог</span>
         </a>
 
     </nav>
@@ -135,24 +157,38 @@
 
 
 <script>
+
     function toggleLike(button) {
+
         const countElement =
             button.querySelector(".like-count");
 
         let count =
-            parseInt(countElement.textContent, 10);
+            parseInt(
+                countElement.textContent.trim(),
+                10
+            );
 
         if (button.classList.contains("liked")) {
+
             button.classList.remove("liked");
+
             count -= 1;
+
         } else {
+
             button.classList.add("liked");
+
             count += 1;
+
         }
 
         countElement.textContent = count;
+
     }
+
 </script>
 
 </body>
+
 </html>

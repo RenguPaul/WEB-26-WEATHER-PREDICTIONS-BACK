@@ -1,17 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Climate Forecast — Добавить</title>
-
-    <link
-        rel="stylesheet"
-        href="/static/css/static.css"
-    >
+    <link rel="stylesheet" href="/static/css/static.css">
 </head>
 
 <body>
@@ -19,166 +12,111 @@
 <div class="phone-screen light-screen">
 
     <header class="page-header">
-
         <div>
-
-            <span class="page-label">
-                CLIMATE FORECAST
-            </span>
-
-            <h1>
-                Новый прогноз температуры
-            </h1>
-
+            <span class="page-label">CLIMATE FORECAST</span>
+            <h1>Новый прогноз температуры</h1>
         </div>
-
         <span class="status-badge">
             Черновик
         </span>
-
     </header>
-
 
     <main class="add-content">
 
         <section class="form-section">
-
-            <h2>
-                Медиа
-            </h2>
+            <h2>Медиа</h2>
 
             <div class="upload-grid">
 
-                <label class="upload-box">
+                <!-- ИЗОБРАЖЕНИЕ -->
+                <label class="upload-box" id="image-upload-box">
+                    <span class="upload-icon">＋</span>
+                    <span class="upload-text">Добавить изображение</span>
 
-                    <span class="upload-icon">
-                        ＋
-                    </span>
-
-                    <span>
-                        Добавить изображение
-                    </span>
+                    <img
+                        id="image-preview"
+                        class="media-preview"
+                        alt="Предпросмотр изображения"
+                    >
 
                     <input
+                        id="image-input"
                         class="file-input"
                         type="file"
                         accept="image/*"
                     >
-
                 </label>
 
+                <!-- ВИДЕО -->
+                <label class="upload-box" id="video-upload-box">
+                    <span class="upload-icon">▶</span>
+                    <span class="upload-text">Добавить видео</span>
 
-                <label class="upload-box">
-
-                    <span class="upload-icon">
-                        ▶
-                    </span>
-
-                    <span>
-                        Добавить видео
-                    </span>
+                    <video
+                        id="video-preview"
+                        class="media-preview"
+                        controls
+                    ></video>
 
                     <input
+                        id="video-input"
                         class="file-input"
                         type="file"
                         accept="video/*"
                     >
-
                 </label>
 
             </div>
-
         </section>
 
-
         <section class="form-section">
+            <h2>Информация</h2>
 
-            <h2>
-                Информация
-            </h2>
-
-
-            <label class="field-label">
-                Название
-            </label>
-
+            <label class="field-label">Название</label>
             <input
                 class="field-input"
                 type="text"
                 value="{{ prediction.title }}"
             >
 
-
-            <label class="field-label">
-                Описание
-            </label>
-
-            <textarea
-                class="field-input field-textarea"
-            >{{ prediction.description }}</textarea>
-
+            <label class="field-label">Описание</label>
+            <textarea class="field-input field-textarea">{{ prediction.description }}</textarea>
         </section>
 
-
         <section class="form-section">
-
-            <h2>
-                Концентрация газов
-            </h2>
+            <h2>Концентрация газов</h2>
 
             <div class="gas-grid">
-
                 <div>
-
-                    <label class="field-label">
-                        CO₂, ppm
-                    </label>
-
+                    <label class="field-label">CO₂, ppm</label>
                     <input
                         class="field-input"
                         type="number"
                         value="{{ prediction.co2_ppm }}"
                     >
-
                 </div>
 
-
                 <div>
-
-                    <label class="field-label">
-                        CH₄, ppb
-                    </label>
-
+                    <label class="field-label">CH₄, ppb</label>
                     <input
                         class="field-input"
                         type="number"
                         value="{{ prediction.ch4_ppb }}"
                     >
-
                 </div>
 
-
                 <div>
-
-                    <label class="field-label">
-                        N₂O, ppb
-                    </label>
-
+                    <label class="field-label">N₂O, ppb</label>
                     <input
                         class="field-input"
                         type="number"
                         value="{{ prediction.n2o_ppb }}"
                     >
-
                 </div>
-
             </div>
-
         </section>
 
-
         <section class="result-card">
-
             <span class="result-label">
                 ПРОГНОЗ ИЗМЕНЕНИЯ ТЕМПЕРАТУРЫ
             </span>
@@ -186,44 +124,74 @@
             <strong>
                 +{{ "%.1f"|format(prediction.temperature_change_c) }} °C
             </strong>
-
         </section>
+
         <button type="button" class="add-button">
             Добавить
         </button>
 
     </main>
 
-
     <nav class="bottom-nav">
-
-        <a
-            class="nav-item"
-            href="/forecast/1"
-        >
+        <a class="nav-item" href="/forecast/1">
             <span>▣</span>
             <span>Лента</span>
         </a>
 
-        <a
-            class="nav-item active"
-            href="/forecast/draft"
-        >
+        <a class="nav-item active" href="/forecast/draft">
             <span>＋</span>
             <span>Добавить</span>
         </a>
 
-        <a
-            class="nav-item"
-            href="/forecast/tile"
-        >
+        <a class="nav-item" href="/forecast/tile">
             <span>▦</span>
-            <span>Плитка</span>
+            <span>Каталог</span>
         </a>
-
     </nav>
 
 </div>
+
+<script>
+    const imageInput = document.getElementById("image-input");
+    const imagePreview = document.getElementById("image-preview");
+    const imageUploadBox = document.getElementById("image-upload-box");
+
+    const videoInput = document.getElementById("video-input");
+    const videoPreview = document.getElementById("video-preview");
+    const videoUploadBox = document.getElementById("video-upload-box");
+
+
+    imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        const imageUrl = URL.createObjectURL(file);
+
+        imagePreview.src = imageUrl;
+        imagePreview.style.display = "block";
+
+        imageUploadBox.classList.add("has-preview");
+    });
+
+
+    videoInput.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        const videoUrl = URL.createObjectURL(file);
+
+        videoPreview.src = videoUrl;
+        videoPreview.style.display = "block";
+
+        videoUploadBox.classList.add("has-preview");
+    });
+</script>
 
 </body>
 </html>

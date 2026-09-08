@@ -1,10 +1,31 @@
+/*
+ * ============================================================
+ * CLIMATE FORECAST — STYLES
+ * ============================================================
+ *
+ * Основные цвета:
+ *
+ * Кнопки:              #00818F
+ * Заголовки H1:        #00357A
+ * Нижняя навигация:    #011837
+ * Навигация/иконки:    #34E1F4
+ *
+ * Hover кнопок:
+ * фон:                 #FFFFFF
+ * текст:               #00818F
+ * border:              #00818F
+ *
+ * Карточки:
+ * прямоугольные, без скругления
+ *
+ * ============================================================
+ */
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    padding: 0;
     margin: 0;
     background: #e9eef1;
     color: #3b5469;
@@ -23,9 +44,9 @@ textarea {
 }
 
 
-/* =========================
-   PHONE
-   ========================= */
+/* ============================================================
+   PHONE SCREEN
+   ============================================================ */
 
 .phone-screen {
     width: 390px;
@@ -42,15 +63,15 @@ textarea {
 }
 
 
-/* =========================
+/* ============================================================
    FEED
-   ========================= */
+   ============================================================ */
 
 .feed-media {
     height: 780px;
+    background: #3b5469;
     position: relative;
     overflow: hidden;
-    background: #3b5469;
 }
 
 .feed-video {
@@ -69,19 +90,15 @@ textarea {
 
     padding: 28px 22px 30px;
 
-    color: white;
+    color: #ffffff;
 
-    background: linear-gradient(
-        to bottom,
-        rgba(59, 84, 105, 0.65),
-        transparent 35%,
-        rgba(0, 0, 0, 0.75)
-    );
-}
-
-.feed-top {
-    display: flex;
-    justify-content: space-between;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(59, 84, 105, 0.65),
+            transparent 35%,
+            rgba(0, 0, 0, 0.75)
+        );
 }
 
 .brand-name {
@@ -102,10 +119,17 @@ textarea {
     font-weight: 700;
 }
 
+.feed-content h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 25px;
+    line-height: 1.15;
+}
 
-/* =========================
-   LIKE
-   ========================= */
+
+/* ============================================================
+   LIKE BUTTON
+   ============================================================ */
 
 .like-row {
     display: flex;
@@ -114,63 +138,76 @@ textarea {
 
     width: fit-content;
 
-    padding: 0;
     margin: 0;
+    padding: 0;
 
-    border: 0;
+    border: none;
     outline: none;
 
     background: transparent;
-    color: white;
 
-    font-family: inherit;
+    color: #ffffff;
+
     font-size: 16px;
+    font-weight: 400;
 
     cursor: pointer;
 
-    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+
+    box-shadow: none;
+
+    transition: transform 0.15s ease;
 }
 
-.like-row:focus {
+.like-row:hover {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.like-row:focus,
+.like-row:active {
+    background: transparent;
+    border: none;
     outline: none;
+    box-shadow: none;
 }
 
 .heart {
+    display: inline-block;
+
+    color: #ffffff;
+
     font-size: 22px;
     line-height: 1;
-
-    color: white;
 
     transition:
         color 0.15s ease,
         transform 0.15s ease;
 }
 
-.like-row:hover .heart {
-    transform: scale(1.08);
+.like-count {
+    min-width: 12px;
+    color: #ffffff;
+    line-height: 1;
 }
 
 .like-row.liked .heart {
-    color: #ff3b30;
+    color: #34E1F4;
     transform: scale(1.12);
 }
 
-.like-count {
-    min-width: 12px;
-    color: white;
+.like-row.liked .like-count {
+    color: #34E1F4;
 }
 
 
-/* =========================
-   FEED CONTENT
-   ========================= */
-
-.feed-content h1 {
-    margin: 0;
-
-    font-size: 25px;
-    line-height: 1.15;
-}
+/* ============================================================
+   GAS CHIPS
+   ============================================================ */
 
 .gas-chips {
     display: flex;
@@ -183,15 +220,20 @@ textarea {
 
     border-radius: 16px;
 
-    background: rgba(12, 177, 139, 0.9);
+    background: #00818F;
+    color: #ffffff;
 
     font-size: 12px;
     font-weight: 700;
 }
 
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
+
 .feed-description {
     margin: 0;
-
     font-size: 14px;
     line-height: 1.45;
 }
@@ -201,89 +243,108 @@ textarea {
     font-weight: 700;
 }
 
-.primary-button {
-    display: block;
 
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.primary-button,
+.add-button {
     width: 100%;
 
     padding: 14px;
 
+    border: 1px solid transparent;
     border-radius: 14px;
 
-    background: #0cb18b;
-    color: white;
+    background: #00818F;
+    color: #ffffff;
 
     text-align: center;
 
     font-size: 15px;
     font-weight: 700;
 
+    cursor: pointer;
+
     transition:
         background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
         transform 0.2s ease;
 }
 
-.primary-button:hover {
-    background: #3b5469;
+.primary-button:hover,
+.add-button:hover {
+    background: #ffffff;
+    color: #00818F;
+    border-color: #00818F;
+
     transform: translateY(-1px);
 }
 
 
-/* =========================
+/* ============================================================
    BOTTOM NAVIGATION
-   ========================= */
+   ============================================================ */
 
 .bottom-nav {
     position: absolute;
 
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
 
     height: 64px;
 
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 
-    background: white;
+    background: #011837;
 
-    border-top: 1px solid #dce3e7;
+    border-top: 1px solid #011837;
 
     z-index: 10;
 }
 
 .nav-item {
+    flex: 1;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     gap: 4px;
 
-    color: #5d707c;
+    color: #34E1F4;
 
     font-size: 11px;
 
-    transition: color 0.2s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.nav-item span:first-child {
+.nav-item:first-child span:first-child {
     font-size: 21px;
 }
 
-.nav-item:hover,
 .nav-item.active {
-    color: #0cb18b;
-}
-
-.nav-item.active {
+    color: #34E1F4;
     font-weight: 700;
 }
 
+.nav-item:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
 
-/* =========================
+
+/* ============================================================
    PAGE HEADER
-   ========================= */
+   ============================================================ */
 
 .page-header {
     padding: 28px 22px 18px;
@@ -296,17 +357,18 @@ textarea {
 }
 
 .page-label {
-    font-size: 10px;
+    color: #5d707c;
 
+    font-size: 10px;
     font-weight: 700;
 
     letter-spacing: 1.7px;
-
-    color: #5d707c;
 }
 
 .page-header h1 {
     margin: 7px 0 0;
+
+    color: #00357A;
 
     font-size: 25px;
     line-height: 1.15;
@@ -325,9 +387,9 @@ textarea {
 }
 
 
-/* =========================
+/* ============================================================
    ADD PAGE
-   ========================= */
+   ============================================================ */
 
 .add-content {
     padding: 0 22px 84px;
@@ -340,48 +402,14 @@ textarea {
 .form-section h2 {
     margin: 0 0 12px;
 
+    color: #3b5469;
+
     font-size: 16px;
 }
 
-
-/* =========================
-   MEDIA TABS
-   ========================= */
-
-.media-tabs {
-    display: flex;
-
-    border-bottom: 1px solid #dce3e7;
-
-    margin-bottom: 12px;
-}
-
-.media-tab {
-    padding: 9px 12px;
-
-    color: #5d707c;
-
-    font-size: 13px;
-}
-
-.media-tab.active {
-    color: #0cb18b;
-
-    border-bottom: 2px solid #0cb18b;
-
-    font-weight: 700;
-}
-
-
-/* =========================
-   FILE UPLOAD
-   ========================= */
-
 .upload-grid {
     display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
@@ -390,23 +418,22 @@ textarea {
 
     position: relative;
 
-    border: 1px dashed #9aabb5;
-
-    border-radius: 12px;
-
     display: flex;
     flex-direction: column;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     gap: 7px;
 
+    overflow: hidden;
+
+    border: 1px dashed #9aabb5;
+    border-radius: 0;
+
+    background: #ffffff;
     color: #5d707c;
 
     font-size: 12px;
-
-    overflow: hidden;
 
     cursor: pointer;
 
@@ -417,17 +444,14 @@ textarea {
 }
 
 .upload-box:hover {
-    border-color: #0cb18b;
-
+    border-color: #00818F;
     background: #f5fbf9;
-
     transform: translateY(-1px);
 }
 
 .upload-icon {
+    color: #00818F;
     font-size: 27px;
-
-    color: #0cb18b;
 }
 
 .file-input {
@@ -442,19 +466,67 @@ textarea {
 }
 
 
-/* =========================
+/* ============================================================
+   MEDIA PREVIEW
+   ============================================================ */
+
+.media-preview {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 0;
+}
+
+.upload-box.has-preview {
+    padding: 5px;
+}
+
+.upload-box.has-preview .upload-icon,
+.upload-box.has-preview .upload-text {
+    position: absolute;
+
+    z-index: 2;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #ffffff;
+
+    text-shadow:
+        0 1px 4px rgba(1, 24, 55, 0.8);
+}
+
+.upload-box.has-preview .upload-icon {
+    top: 35%;
+}
+
+.upload-box.has-preview .upload-text {
+    bottom: 10px;
+
+    width: calc(100% - 20px);
+
+    text-align: center;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
    FORM FIELDS
-   ========================= */
+   ============================================================ */
 
 .field-label {
     display: block;
 
     margin: 10px 0 6px;
 
-    font-size: 11px;
-
     color: #5d707c;
 
+    font-size: 11px;
     font-weight: 700;
 }
 
@@ -462,13 +534,11 @@ textarea {
     width: 100%;
 
     border: 1px solid #ccd7dd;
-
     border-radius: 10px;
 
     padding: 11px;
 
-    background: white;
-
+    background: #ffffff;
     color: #3b5469;
 
     font-size: 13px;
@@ -481,22 +551,16 @@ textarea {
 }
 
 .field-input:focus {
-    border-color: #0cb18b;
+    border-color: #00818F;
 
     box-shadow:
-        0 0 0 2px rgba(12, 177, 139, 0.12);
+        0 0 0 2px rgba(0, 129, 143, 0.12);
 }
 
 .field-textarea {
     min-height: 90px;
-
     resize: none;
 }
-
-
-/* =========================
-   GAS FIELDS
-   ========================= */
 
 .gas-grid {
     display: grid;
@@ -507,23 +571,19 @@ textarea {
 }
 
 
-/* =========================
+/* ============================================================
    RESULT CARD
-   ========================= */
+   ============================================================ */
 
 .result-card {
     margin-bottom: 20px;
 
     padding: 17px;
 
-    border-radius: 15px;
+    border-radius: 0;
 
-    background: #3b5469;
-
-    color: white;
-
-    box-shadow:
-        0 4px 12px rgba(59, 84, 105, 0.15);
+    background: #011837;
+    color: #ffffff;
 }
 
 .result-label {
@@ -532,7 +592,6 @@ textarea {
     margin-bottom: 7px;
 
     font-size: 9px;
-
     letter-spacing: 1.2px;
 }
 
@@ -541,9 +600,9 @@ textarea {
 }
 
 
-/* =========================
-   TILE PAGE
-   ========================= */
+/* ============================================================
+   CATALOG
+   ============================================================ */
 
 .tile-content {
     padding: 0 18px 84px;
@@ -556,14 +615,14 @@ textarea {
 .filter-section h2 {
     margin: 0 0 12px;
 
+    color: #00357A;
+
     font-size: 17px;
 }
 
 .filter-form {
     display: flex;
-
-    align-items: end;
-
+    align-items: flex-end;
     gap: 8px;
 }
 
@@ -574,29 +633,26 @@ textarea {
 .filter-input-wrapper label {
     display: block;
 
-    margin-bottom: 5px;
+    margin-bottom: 6px;
+
+    color: #5d707c;
 
     font-size: 9px;
-
     font-weight: 700;
 
     letter-spacing: 1px;
-
-    color: #5d707c;
 }
 
 .input-with-unit {
     display: flex;
-
     align-items: center;
 
-    border: 1px solid #ccd7dd;
+    overflow: hidden;
 
+    border: 1px solid #ccd7dd;
     border-radius: 10px;
 
-    background: white;
-
-    overflow: hidden;
+    background: #ffffff;
 
     transition:
         border-color 0.2s ease,
@@ -604,24 +660,21 @@ textarea {
 }
 
 .input-with-unit:focus-within {
-    border-color: #0cb18b;
+    border-color: #00818F;
 
     box-shadow:
-        0 0 0 2px rgba(12, 177, 139, 0.12);
+        0 0 0 2px rgba(0, 129, 143, 0.12);
 }
 
 .input-with-unit input {
     width: 100%;
 
     border: 0;
-
-    outline: none;
+    outline: 0;
 
     padding: 11px;
 
     color: #3b5469;
-
-    background: transparent;
 
     font-size: 13px;
 }
@@ -635,15 +688,13 @@ textarea {
 }
 
 .filter-form button {
-    border: 0;
-
+    border: 1px solid transparent;
     border-radius: 10px;
 
     padding: 11px 13px;
 
-    background: #0cb18b;
-
-    color: white;
+    background: #00818F;
+    color: #ffffff;
 
     font-weight: 700;
 
@@ -651,39 +702,42 @@ textarea {
 
     transition:
         background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
         transform 0.2s ease;
 }
 
 .filter-form button:hover {
-    background: #3b5469;
+    background: #ffffff;
+    color: #00818F;
+
+    border-color: #00818F;
 
     transform: translateY(-1px);
 }
 
 
-/* =========================
-   TILE GRID
-   ========================= */
+/* ============================================================
+   PREDICTION CARDS
+   ============================================================ */
 
 .tile-grid {
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 12px;
 }
 
 .prediction-card {
-    display: block;
-
     overflow: hidden;
 
-    border-radius: 14px;
+    border-radius: 0;
 
-    background: white;
+    background: #ffffff;
 
     box-shadow:
-        0 3px 12px rgba(59, 84, 105, 0.12);
+        0 3px 12px rgba(1, 24, 55, 0.12);
 
     transition:
         transform 0.2s ease,
@@ -694,13 +748,8 @@ textarea {
     transform: translateY(-2px);
 
     box-shadow:
-        0 6px 18px rgba(59, 84, 105, 0.18);
+        0 6px 18px rgba(1, 24, 55, 0.18);
 }
-
-
-/* =========================
-   PREDICTION IMAGE
-   ========================= */
 
 .prediction-image-wrapper {
     height: 145px;
@@ -714,15 +763,7 @@ textarea {
     width: 100%;
     height: 100%;
 
-    display: block;
-
     object-fit: cover;
-
-    transition: transform 0.3s ease;
-}
-
-.prediction-card:hover .prediction-image {
-    transform: scale(1.03);
 }
 
 .prediction-temperature {
@@ -733,39 +774,32 @@ textarea {
 
     padding: 5px 7px;
 
-    border-radius: 8px;
+    border-radius: 0;
 
-    background: #0cb18b;
-
-    color: white;
+    background: #00818F;
+    color: #ffffff;
 
     font-size: 12px;
-
     font-weight: 700;
 }
-
-
-/* =========================
-   PREDICTION CARD CONTENT
-   ========================= */
 
 .prediction-card-content {
     padding: 10px;
 }
 
-.prediction-card h3 {
+.prediction-card-content h3 {
     min-height: 35px;
 
     margin: 0 0 8px;
 
-    font-size: 13px;
+    color: #00357A;
 
+    font-size: 13px;
     line-height: 1.25;
 }
 
 .prediction-likes {
     display: flex;
-
     align-items: center;
 
     gap: 5px;
@@ -776,50 +810,14 @@ textarea {
 }
 
 .prediction-likes span:first-child {
-    color: #0cb18b;
-
+    color: #00818F;
     font-size: 15px;
 }
 
 
-/* =========================
-   EMPTY STATE
-   ========================= */
-
-.tile-grid:empty::after {
-    content: "Ничего не найдено";
-
-    grid-column: 1 / -1;
-
-    display: block;
-
-    padding: 30px 10px;
-
-    border-radius: 14px;
-
-    background: white;
-
-    color: #5d707c;
-
-    text-align: center;
-
-    font-size: 13px;
-}
-
-
-/* =========================
-   SCROLLBAR
-   ========================= */
-
-.phone-screen {
-    scrollbar-width: thin;
-    scrollbar-color: #9aabb5 transparent;
-}
-
-
-/* =========================
-   RESPONSIVE
-   ========================= */
+/* ============================================================
+   MOBILE
+   ============================================================ */
 
 @media (max-width: 390px) {
 
@@ -827,72 +825,4 @@ textarea {
         width: 100%;
     }
 
-}
-
-@media (max-width: 350px) {
-
-    .feed-overlay {
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    .temperature {
-        font-size: 40px;
-    }
-
-    .feed-content h1 {
-        font-size: 22px;
-    }
-
-    .tile-grid {
-        gap: 8px;
-    }
-
-    .prediction-image-wrapper {
-        height: 125px;
-    }
-
-}
-
-
-/* =========================
-   ACCESSIBILITY
-   ========================= */
-
-.like-row:focus-visible,
-.primary-button:focus-visible,
-.nav-item:focus-visible,
-.prediction-card:focus-visible,
-.filter-form button:focus-visible,
-.upload-box:focus-within {
-    outline: 2px solid #0cb18b;
-
-    outline-offset: 2px;
-}
-
-/* ADD BUTTON */
-.add-button {
-    width: 100%;
-    margin: 0 0 20px;
-    padding: 14px;
-    border: 0;
-    border-radius: 14px;
-    background: #0cb18b;
-    color: white;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-.add-button:hover {
-    background: #3b5469;
-    transform: translateY(-1px);
-}
-
-.add-button:active {
-    transform: translateY(0);
 }
