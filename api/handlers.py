@@ -8,6 +8,8 @@ from data.collections import climate_predictions
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
+MINIO_URL = "http://localhost:9000/climate-media"
+
 
 def get_published_predictions():
     return [
@@ -19,7 +21,19 @@ def get_published_predictions():
 
 def prepare_prediction(prediction):
     prepared_prediction = prediction.copy()
-    prepared_prediction["likes_count"] = len(prediction["likes"])
+
+    prepared_prediction["likes_count"] = len(
+        prediction["likes"]
+    )
+
+    prepared_prediction["image_url"] = (
+        f"{MINIO_URL}/{prediction['image_key']}"
+    )
+
+    prepared_prediction["video_url"] = (
+        f"{MINIO_URL}/{prediction['video_key']}"
+    )
+
     return prepared_prediction
 
 
@@ -83,7 +97,10 @@ def get_tile(
 def get_forecast(
     request: Request,
     prediction_id: int,
-    go_next: bool = Query(default=False, alias="next"),
+    go_next: bool = Query(
+        default=False,
+        alias="next",
+    ),
 ):
     published = get_published_predictions()
 

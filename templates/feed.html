@@ -1,10 +1,17 @@
+`
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Climate Forecast — Лента</title>
-    <link rel="stylesheet" href="/static/css/static.css">
+
+    <link
+        rel="stylesheet"
+        href="/static/css/static.css"
+    >
 </head>
 
 <body>
@@ -30,7 +37,9 @@
         <div class="feed-overlay">
 
             <div class="feed-top">
-                <span class="brand-name">CLIMATE FORECAST</span>
+                <span class="brand-name">
+                    CLIMATE FORECAST
+                </span>
             </div>
 
             <div class="feed-content">
@@ -39,24 +48,45 @@
                     +{{ "%.1f"|format(prediction.temperature_change_c) }} °C
                 </div>
 
-                <div class="like-row">
+                <button
+                    type="button"
+                    class="like-row"
+                    onclick="toggleLike(this)"
+                    aria-label="Лайк"
+                >
                     <span class="heart">♥</span>
-                    <span>{{ prediction.likes_count }}</span>
-                </div>
+
+                    <span class="like-count">
+                        {{ prediction.likes_count }}
+                    </span>
+                </button>
 
                 <h1>
                     {{ prediction.title }}
                 </h1>
 
                 <div class="gas-chips">
-                    <span>CO₂ {{ prediction.co2_ppm }} ppm</span>
-                    <span>CH₄ {{ prediction.ch4_ppb }} ppb</span>
-                    <span>N₂O {{ prediction.n2o_ppb }} ppb</span>
+
+                    <span>
+                        CO₂ {{ prediction.co2_ppm }} ppm
+                    </span>
+
+                    <span>
+                        CH₄ {{ prediction.ch4_ppb }} ppb
+                    </span>
+
+                    <span>
+                        N₂O {{ prediction.n2o_ppb }} ppb
+                    </span>
+
                 </div>
 
                 <p class="feed-description">
                     {{ prediction.description }}
-                    <span class="more-link">Подробнее →</span>
+
+                    <span class="more-link">
+                        Подробнее →
+                    </span>
                 </p>
 
                 <a
@@ -72,19 +102,29 @@
 
     </div>
 
+
     <nav class="bottom-nav">
 
-        <a class="nav-item active" href="/forecast/1">
+        <a
+            class="nav-item active"
+            href="/forecast/1"
+        >
             <span>▣</span>
             <span>Лента</span>
         </a>
 
-        <a class="nav-item" href="/forecast/draft">
+        <a
+            class="nav-item"
+            href="/forecast/draft"
+        >
             <span>＋</span>
             <span>Добавить</span>
         </a>
 
-        <a class="nav-item" href="/forecast/tile">
+        <a
+            class="nav-item"
+            href="/forecast/tile"
+        >
             <span>▦</span>
             <span>Плитка</span>
         </a>
@@ -92,6 +132,27 @@
     </nav>
 
 </div>
+
+
+<script>
+    function toggleLike(button) {
+        const countElement =
+            button.querySelector(".like-count");
+
+        let count =
+            parseInt(countElement.textContent, 10);
+
+        if (button.classList.contains("liked")) {
+            button.classList.remove("liked");
+            count -= 1;
+        } else {
+            button.classList.add("liked");
+            count += 1;
+        }
+
+        countElement.textContent = count;
+    }
+</script>
 
 </body>
 </html>

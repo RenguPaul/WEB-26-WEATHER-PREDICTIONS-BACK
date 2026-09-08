@@ -1,28 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climate Forecast — Плитка</title>
-    <link rel="stylesheet" href="/static/css/static.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Climate Forecast — Плитка
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/static.css"
+    >
+
 </head>
+
 
 <body>
 
 <div class="phone-screen light-screen">
 
     <header class="page-header">
+
         <div>
-            <span class="page-label">CLIMATE FORECAST</span>
-            <h1>Плитка</h1>
+
+            <span class="page-label">
+                CLIMATE FORECAST
+            </span>
+
+            <h1>
+                Плитка
+            </h1>
+
         </div>
+
     </header>
+
 
     <main class="tile-content">
 
         <section class="filter-section">
 
-            <h2>Климатические расчёты</h2>
+            <h2>
+                Климатические расчёты
+            </h2>
+
 
             <form
                 method="get"
@@ -36,6 +65,7 @@
                         ФИЛЬТР ПО CO₂
                     </label>
 
+
                     <div class="input-with-unit">
 
                         <input
@@ -46,11 +76,14 @@
                             value="{{ co2_filter }}"
                         >
 
-                        <span>ppm</span>
+                        <span>
+                            ppm
+                        </span>
 
                     </div>
 
                 </div>
+
 
                 <button type="submit">
                     Найти
@@ -59,6 +92,7 @@
             </form>
 
         </section>
+
 
         <section class="tile-grid">
 
@@ -83,15 +117,24 @@
 
                 </div>
 
+
                 <div class="prediction-card-content">
 
                     <h3>
                         {{ prediction.title }}
                     </h3>
 
+
                     <div class="prediction-likes">
-                        <span>♥</span>
-                        <span>{{ prediction.likes_count }}</span>
+
+                        <span>
+                            ♥
+                        </span>
+
+                        <span>
+                            {{ prediction.likes_count }}
+                        </span>
+
                     </div>
 
                 </div>
@@ -104,19 +147,31 @@
 
     </main>
 
+
     <nav class="bottom-nav">
 
-        <a class="nav-item" href="/forecast/1">
+        <a
+            class="nav-item"
+            href="/forecast/1"
+        >
             <span>▣</span>
             <span>Лента</span>
         </a>
 
-        <a class="nav-item" href="/forecast/draft">
+
+        <a
+            class="nav-item"
+            href="/forecast/draft"
+        >
             <span>＋</span>
             <span>Добавить</span>
         </a>
 
-        <a class="nav-item active" href="/forecast/tile">
+
+        <a
+            class="nav-item active"
+            href="/forecast/tile"
+        >
             <span>▦</span>
             <span>Плитка</span>
         </a>
@@ -127,3 +182,4 @@
 
 </body>
 </html>
+
