@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ greenhouse_gas.name }} — Greenhouse Gases
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/static.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="phone-screen feed-screen">
+
+
+    <div class="feed-media">
+
+        <video
+            class="feed-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="{{ greenhouse_gas.image_url }}"
+        >
+
+            <source
+                src="{{ greenhouse_gas.video_url }}"
+                type="video/mp4"
+            >
+
+        </video>
+
+
+        <div class="feed-overlay">
+
+
+            <div class="feed-top">
+
+                <span class="brand-name">
+                    GREENHOUSE GASES
+                </span>
+
+            </div>
+
+
+            <div class="feed-main">
+
+
+                <!-- RIGHT INFORMATION PANEL -->
+
+                <div class="feed-right-panel">
+
+
+                    <div class="parameter-item">
+
+                        <span class="parameter-value">
+                            {{ greenhouse_gas.concentration_ppm }}
+                        </span>
+
+                        <span class="parameter-label">
+                            ppm
+                        </span>
+
+                    </div>
+
+
+                    <div class="parameter-item">
+
+                        <span class="parameter-value">
+                            {{ greenhouse_gas.atmospheric_lifetime_years }}
+                        </span>
+
+                        <span class="parameter-label">
+                            years
+                        </span>
+
+                    </div>
+
+
+                    <div class="like-display">
+
+                        <span class="like-icon">
+                            ♡
+                        </span>
+
+                        <span>
+                            {{ greenhouse_gas.likes_count }}
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- MAIN INFORMATION -->
+
+                <div class="feed-description-block">
+
+
+                    <h1>
+                        {{ greenhouse_gas.name }}
+                    </h1>
+
+
+                    <div class="temperature-result">
+
+                        +{{ "%.1f"|format(
+                            greenhouse_gas.temperature_change
+                        ) }} °C
+
+                    </div>
+
+
+                    <p class="feed-description">
+
+                        {{ greenhouse_gas.description }}
+
+                        <span class="more-link">
+                            Ещё
+                        </span>
+
+                    </p>
+
+
+                </div>
+
+
+                <!-- NEXT -->
+
+                <a
+                    class="primary-button next-button"
+                    href="/greenhouse-gases/{{ greenhouse_gas.id }}?next=true"
+                >
+                    Следующий Greenhouse Gas
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="bottom-nav">
+
+
+        <a
+            class="nav-item active"
+            href="/greenhouse-gases/1"
+        >
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span>
+                Greenhouse Gas
+            </span>
+
+        </a>
+
+
+        <a
+            class="nav-item add-nav"
+            href="/greenhouse-gases/request"
+        >
+
+            <span class="nav-plus">
+                +
+            </span>
+
+        </a>
+
+
+        <a
+            class="nav-item"
+            href="/greenhouse-gases/catalog"
+        >
+
+            <span class="nav-icon">
+                ▦
+            </span>
+
+            <span>
+                Catalog
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+</div>
+
+</body>
+
+</html>
