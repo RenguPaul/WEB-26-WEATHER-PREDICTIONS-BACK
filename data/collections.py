@@ -1,96 +1,77 @@
-climate_predictions = [
+greenhouse_gases = [
     {
         "id": 1,
-        "title": "Удвоение концентрации CO₂",
+        "name": "Углекислый газ",
+        "formula": "CO2",
+        "concentration_ppm": 420.0,
+        "global_warming_potential_100y": 1.0,
         "description": (
-            "Климатический расчёт показывает изменение глобальной "
-            "средней температуры при заданной концентрации "
-            "парниковых газов."
+            "Углекислый газ — основной антропогенный парниковый газ. "
+            "Рост его концентрации влияет на среднюю температуру Земли."
         ),
-        "co2_ppm": 550,
-        "ch4_ppb": 1900,
-        "n2o_ppb": 330,
-        "temperature_change_c": 3.0,
-        "likes": [101, 104, 107, 112, 115],
+        "likes": [1, 2, 3, 4, 5, 6, 7, 8],
         "status": "published",
         "image_key": "co2-double.jpg",
         "video_key": "co2-double.mp4",
     },
     {
         "id": 2,
-        "title": "Повышенная концентрация CH₄",
+        "name": "Метан",
+        "formula": "CH4",
+        "concentration_ppm": 1.9,
+        "global_warming_potential_100y": 27.2,
         "description": (
-            "Расчёт изменения глобальной средней температуры "
-            "при повышенном содержании метана в атмосфере."
+            "Метан присутствует в атмосфере в меньшей концентрации, "
+            "но обладает значительно более высоким потенциалом потепления."
         ),
-        "co2_ppm": 420,
-        "ch4_ppb": 2400,
-        "n2o_ppb": 335,
-        "temperature_change_c": 2.1,
-        "likes": [102, 108, 113],
+        "likes": [2, 4, 7],
         "status": "published",
         "image_key": "methane-rise.jpg",
         "video_key": "methane-rise.mp4",
     },
     {
         "id": 3,
-        "title": "Рост концентрации N₂O",
+        "name": "Оксид азота",
+        "formula": "N2O",
+        "concentration_ppm": 0.33,
+        "global_warming_potential_100y": 273.0,
         "description": (
-            "Расчёт изменения глобальной средней температуры "
-            "при увеличении содержания закиси азота."
+            "Оксид азота — долгоживущий парниковый газ, "
+            "концентрация которого также влияет на радиационный баланс."
         ),
-        "co2_ppm": 450,
-        "ch4_ppb": 1900,
-        "n2o_ppb": 400,
-        "temperature_change_c": 4.0,
-        "likes": [101, 103, 106, 109, 114, 118],
+        "likes": [1, 3, 5, 8, 9],
         "status": "published",
         "image_key": "nitrous-oxide.jpg",
         "video_key": "nitrous-oxide.mp4",
     },
     {
         "id": 4,
-        "title": "Снижение концентрации CO₂",
+        "name": "Углекислый газ — расчёт",
+        "formula": "CO2",
+        "concentration_ppm": 550.0,
+        "global_warming_potential_100y": 1.0,
         "description": (
-            "Климатический расчёт при снижении концентрации "
-            "углекислого газа в атмосфере."
+            "Черновая заявка для расчёта изменения средней температуры "
+            "при заданной концентрации углекислого газа."
         ),
-        "co2_ppm": 350,
-        "ch4_ppb": 1800,
-        "n2o_ppb": 320,
-        "temperature_change_c": 1.5,
-        "likes": [105, 110, 116],
-        "status": "published",
+        "likes": [1, 2],
+        "status": "draft",
         "image_key": "co2-reduction.jpg",
         "video_key": "co2-reduction.mp4",
     },
     {
         "id": 5,
-        "title": "Новый прогноз температуры",
+        "name": "Гексафторид серы",
+        "formula": "SF6",
+        "concentration_ppm": 0.00001,
+        "global_warming_potential_100y": 24300.0,
         "description": (
-            "Черновой климатический расчёт с заданными "
-            "концентрациями парниковых газов."
+            "Гексафторид серы — очень сильный парниковый газ. "
+            "Запись оставлена в коллекции для демонстрации статуса deleted."
         ),
-        "co2_ppm": 550,
-        "ch4_ppb": 1900,
-        "n2o_ppb": 330,
-        "temperature_change_c": 3.0,
-        "likes": [],
-        "status": "draft",
-        "image_key": "nitrous-oxide.jpg",
-        "video_key": "nitrous-oxide.mp4",
-    },
-    {
-        "id": 6,
-        "title": "Удалённый прогноз",
-        "description": "Удалённый климатический расчёт.",
-        "co2_ppm": 300,
-        "ch4_ppb": 1700,
-        "n2o_ppb": 310,
-        "temperature_change_c": 1.0,
-        "likes": [111],
+        "likes": [3],
         "status": "deleted",
-        "image_key": "co2-reduction.jpg",
-        "video_key": "co2-reduction.mp4",
+        "image_key": "co2-double.jpg",
+        "video_key": "co2-double.mp4",
     },
 ]

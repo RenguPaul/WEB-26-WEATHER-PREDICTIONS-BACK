@@ -1,28 +1,25 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-import uvicorn
 
 from api.handlers import router
 
 
 app = FastAPI(
-    title="Climate Temperature Forecast",
+    title="Greenhouse Gases",
     description=(
-        "Прогноз температуры на Земле "
+        "Сервис прогнозирования изменения температуры Земли "
         "в зависимости от содержания парниковых газов в атмосфере."
     ),
 )
 
-app.mount(
-    "/static",
-    StaticFiles(directory="static"),
-    name="static",
-)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(router)
 
 
 if __name__ == "__main__":
+    import uvicorn
+
     uvicorn.run(
         "main:app",
         host="127.0.0.1",
